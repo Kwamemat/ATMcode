@@ -112,14 +112,27 @@ def withdraw_money(username):
     f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
     
     
+def get_balance(username, currency):
+    return userDetails[username]['balance'][get_currency()]
+    
+def set_currency():
+    account = input("Would you like to access your GHS or USD account?\n" +
+    "1.GHS account \n2.USD account\n")
+
+    global currency
+
+    if(account == '1'):
+        currency = 'GHS'
+    elif(account == '2'): 
+        currency = 'USD'
+    else:
+        set_currency()
     
     
     
     
     
-    
-    
-    ##### Georgina's code goes into the space left above
+    ##### Gifty's code goes into the space left above. She's to add only the get_curency method.
     
     
 def welcome_user(username):
