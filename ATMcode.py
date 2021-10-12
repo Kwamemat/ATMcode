@@ -1,3 +1,8 @@
+from datetime import datetime
+import random
+import math
+
+
 #This is the dictionary that holds user information
 userDetails = {'kojo': 
                 {'pin':'1234', 
@@ -102,3 +107,8 @@ def withdraw_money(username):
     userDetails[username]['balance'][get_curency()] = balance - amount
     print(f"You have successfully withdrawn {amount} {get_currency()}" +
     f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
+    
+    
+    
+    
+    
