@@ -58,12 +58,12 @@ currency = None
 
 #This function is called to verify user credentials and returns a boolean value 
  #depending on the validity of credentials entered
- def user_is_valid(username, pin):
-     if username in userDetails:
-         if pin == userDetails[username]['pin']:
-             return True
+def user_is_valid(username, pin):
+    if username in userDetails:
+        if pin == userDetails[username]['pin']:
+            return True
 
-     return False
+    return False
 
 #This function collects user credentials and validates the session or recalls itself
 def login():
@@ -104,8 +104,8 @@ def withdraw_money(username):
   balance = userDetails[username]['balance'][get_currency()]
    
   if(balance - amount < 0):
-     print("Your account balance is not sufficient to complete this transaction")
-     amt = "insufficient funds"
+    print("Your account balance is not sufficient to complete this transaction")
+    amt = "insufficient funds"
   else:
     userDetails[username]['balance'][get_curency()] = balance - amount
     print(f"You have successfully withdrawn {amount} {get_currency()}" +
