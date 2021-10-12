@@ -89,3 +89,16 @@ def deposit(username):
         userDetails[username]['balance'][get_currency()] = newBalance
         print(f"An amount of {amount} {get_currency()} has been deposited into your account" +
         f"\nYour new balance is {get_balance(username, get_currency())} {get_currency()}")
+#This function allows users to withdraw money from their accounts depending on their account balance
+def withdraw_money(username):
+  
+  amount = int(input(f"How much in {get_currency()} would you like to withdraw?\n"))
+  balance = userDetails[username]['balance'][get_currency()]
+   
+  if(balance - amount < 0):
+     print("Your account balance is not sufficient to complete this transaction")
+      
+  else:
+    userDetails[username]['balance'][get_curency()] = balance - amount
+    print(f"You have successfully withdrawn {amount} {get_currency()}" +
+    f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
