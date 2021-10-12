@@ -20,19 +20,23 @@ userDetails = {'kojo':
                 'balance' : {'GHS' : 35196,
                              'USD' : 5866}},
                'fernanda':
-               {'pin':'5047'},
+               {'pin':'5047',
                 'balance' : {'GHS' : 790665,
                              'USD' : 7989}},
                 'gifty':
+                {'pin' : '6060',
                 'balance' : {'GHS' : 34212,
                              'USD' : 5702}},
                 'exorm':
+                {'pin' : '4658',
                 'balance': {'GHS' : 323154,
                             'USD' : 3859}},
                 'sampson':
+                {'pin' : '9390',
                 'balance': {'GHS' : 26322,
                             'USD' : 4387}},
                 'georgina':
+                {'pin' : '7793',
                 'balance': {'GHS' : 31974,
                             'USD' : 5329}},
                }
