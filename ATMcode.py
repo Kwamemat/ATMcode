@@ -74,3 +74,14 @@ def login():
         'Please try again')
         login()
 
+#This function is for depositing money into your account
+def deposit(username):
+
+    amount = int(input(f"How much would you like to deposit into your {get_currency()} account? "))
+
+    balance = userDetails[username]['balance'][get_currency()]
+    newBalance = balance + amount
+    userDetails[username]['balance'][get_currency()] = newBalance
+
+    print(f"An amount of {amount} {get_currency()} has been deposited into your account" +
+    f"\nYour new balance is {get_balance(username, get_currency())} {get_currency()}")
