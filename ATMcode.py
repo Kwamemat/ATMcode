@@ -55,3 +55,22 @@ currency = None
              return True
 
      return False
+
+#This function collects user credentials and validates the session or recalls itself
+def login():
+
+    #The global keyword enables global variables to be changed at runtime
+    global username
+    global is_logged_in
+
+    username = input("Please type your username\n")
+    pin = input("Please enter your pin\n")
+    
+    if(user_is_valid(username, pin)):
+        is_logged_in = True
+
+    else:
+        print("Credentials not valid.\n" +
+        'Please try again')
+        login()
+
