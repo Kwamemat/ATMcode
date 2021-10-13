@@ -269,7 +269,7 @@ def generate_receipt(transactions):
     elif choice == "n":
         print("THANKS FOR CHOOSING RESOLUTE BANK")
     else:
-        print("WRONG INPUT")
+        generate_receipt(transactions)
         
         
 #This is the begining of the application where a user is asked to enter their credentials
@@ -284,8 +284,7 @@ welcome_user(username)
     
 
 
-generate_receipt(transactions)
-is_logged_in = False
+generate_receipt(transactions)  
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
