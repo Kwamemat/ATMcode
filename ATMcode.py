@@ -158,7 +158,7 @@ def withdraw_money(username):
         transaction = Transaction(username, "Withdrawal", amount, get_currency(), username)
         transactions.append(transaction)
 
-        answer = input("\nWould you like to make another transaction? \n1.Yes\n")
+        answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
         if(answer == '1'):
             welcome_user(username)
