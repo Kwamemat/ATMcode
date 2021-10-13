@@ -85,11 +85,14 @@ def login():
 
 #This function is for depositing money into your account
 def deposit(username):
-    amount = int(input(f"How much would you like to deposit into your {get_currency()} account? "))
+    global amt
+    amount = int(input(f"How much would you like to deposit into your {get_currency()} account?\n "))
+    amt = amount
     balance = userDetails[username]['balance'][get_currency()]
     newBalance = balance + amount
     if (amount <= 0):
         print("You cannot deposit 0")
+        amt = "0 funds"
     else:
         userDetails[username]['balance'][get_currency()] = newBalance
         print(f"An amount of {amount} {get_currency()} has been deposited into your account" +
@@ -130,7 +133,7 @@ def set_currency():
     
     
     
- 
+
     
     ##### Gifty's code goes into the space left above. She's to add only the get_curency method.
     
@@ -139,19 +142,20 @@ def welcome_user(username):
     print(f"Hello {username}")
 
     set_currency()
-    global ww
+    global transactiontype
     global amt
     print("What would you like today?\n")
     
-    answer = input("1. Withdraw Money" + "2. Deposit"
+    answer = input("1. Withdraw Money" + "\n2. Deposit"
                     "\n3. Check Your Balance\n")
     if(answer == '1'):
-        ww = "withdrawal"
+        transactiontype = "withdrawal"
         withdraw_money(username)
     elif(answer == '2'):
+        transactiontype = "deposit"
         deposit(username)
     else:
-        ww = "Balance enquiry"
+        transactiontype = "Balance enquiry"
         print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
         amt = "-----"
         
@@ -180,14 +184,15 @@ def receipt(): # a function to print out a receipt when the withdrawal and balan
 
     
     print(" ********************************************")
-    print(" * Date and time           ",d1)
+    print(" * Date and time          ",d1)
     print(" * Card number:            xxxxxxxxxx"+n)
-    print(" * Transaction:               "+ ww)
+    print(" * Accountname:            "+ username)
+    print(" * Transaction:            "+ transactiontype)
     print(" ****************************************")
     print(" *                                 ")
-    print(f" * Dispensed Amt:         {amt} {get_currency()} ")
-    print(f" * Requested Amt:         {amt} {get_currency()}")
-    print(f" * Balance                {get_balance(username, get_currency())} {get_currency()}")
+    print(f" * Dispensed Amount:         {amt} {get_currency()} ")
+    print(f" * Requested Amount:         {amt} {get_currency()}")
+    print(f" * Balance                   {get_balance(username, get_currency())} {get_currency()}")
     print(" ********************************************")
     print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
 
