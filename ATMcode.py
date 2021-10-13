@@ -208,7 +208,7 @@ def set_currency():
     else:
         set_currency()
 
-def get_currency(self):
+def get_currency():
     return currency
        
     
