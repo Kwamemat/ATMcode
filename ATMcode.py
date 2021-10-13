@@ -46,6 +46,26 @@ userDetails = {'kojo':
                             'USD' : 5329}},
                }
 
+class Transaction():
+
+    def __init__(self, username, transaction_type, amount, recipient):
+        self.username = username
+        self.transaction_type = transaction_type
+        self.amount = amount
+        self.recipient = recipient
+
+    def get_username():
+        return username
+    
+    def get_transaction_type():
+        return transaction_type
+    
+    def get_amount():
+        return amount
+    
+    def get_recipient():
+        return recipient
+
             
 
 #This variable is set to false by default but changed to true when a user is validated for a session
@@ -54,6 +74,8 @@ is_logged_in = False
 username = None
 
 currency = None
+
+transactions = []
 
 
 #This function is called to verify user credentials and returns a boolean value 
@@ -98,6 +120,9 @@ def deposit(username):
         print(f"An amount of {amount} {get_currency()} has been deposited into your account" +
         f"\nYour new balance is {get_balance(username, get_currency())} {get_currency()}")
 
+        transaction = Transaction(username, "Deposit", amount, username)
+        transactions.append(transaction)
+
  #This function allows users to withdraw money from their accounts depending on their account balance
 def withdraw_money(username):
 
@@ -114,6 +139,9 @@ def withdraw_money(username):
         userDetails[username]['balance'][get_currency()] = balance - amount
         print(f"You have successfully withdrawn {amount} {get_currency()}" +
         f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
+
+        transaction = Transaction(username, "Withdrawal", amount, username)
+        transactions.append(transaction)
 
         answer = input("\nWould you like to make another withdrawal? \n1.Yes\n")
 
@@ -136,6 +164,9 @@ def transfer_money(username):
             userDetails[user]['balance'][get_currency()] += amount
             print(f"You have successfully transferred {amount} {get_currency()} to {user}")
             print(f"Your new balance is {get_balance(username, get_currency())}")
+
+            transaction = Transaction(username, "Transfer", amount, user)
+            transactions.append(transaction)
     
 def get_balance(username, currency):
     return userDetails[username]['balance'][get_currency()]
@@ -152,6 +183,9 @@ def set_currency():
         currency = 'USD'
     else:
         set_currency()
+
+def get_currency():
+    return currency
        
 
     
