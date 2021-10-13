@@ -107,7 +107,7 @@ def withdraw_money(username):
     print("Your account balance is not sufficient to complete this transaction")
     amt = "insufficient funds"
   else:
-    userDetails[username]['balance'][get_curency()] = balance - amount
+    userDetails[username]['balance'][get_currency()] = balance - amount
     print(f"You have successfully withdrawn {amount} {get_currency()}" +
     f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
     
@@ -130,7 +130,7 @@ def set_currency():
     
     
     
-    
+ 
     
     ##### Gifty's code goes into the space left above. She's to add only the get_curency method.
     
@@ -143,11 +143,13 @@ def welcome_user(username):
     global amt
     print("What would you like today?\n")
     
-    answer = input("1.Withdraw Money" +
-                    "\n2.Check Your Balance\n")
+    answer = input("1. Withdraw Money" + "2. Deposit"
+                    "\n3. Check Your Balance\n")
     if(answer == '1'):
         ww = "withdrawal"
         withdraw_money(username)
+    elif(answer == '2'):
+        deposit(username)
     else:
         ww = "Balance enquiry"
         print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
