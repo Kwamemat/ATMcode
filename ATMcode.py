@@ -192,7 +192,7 @@ while(is_logged_in == False):
 
 welcome_user(username)        
     
-def receipt(): # a function to print out a receipt when the withdrawal and balance functions are performed
+def generate_receipt(): # a function to print out a receipt when the withdrawal and balance functions are performed
     today = datetime.now() # variable to get date and time from local machine
 
 # dd/mm/YY H:M:S formats date in preferable style
@@ -218,7 +218,7 @@ def receipt(): # a function to print out a receipt when the withdrawal and balan
     print(" ********************************************")
     print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
 
-receipt()    
+generate_receipt()    
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
