@@ -164,7 +164,36 @@ while(is_logged_in == False):
 
 welcome_user(username)        
     
+def receipt(): # a function to print out a receipt when the withdrawal and balance functions are performed
+    today = datetime.now() # variable to get date and time from local machine
+
+# dd/mm/YY H:M:S formats date in preferable style
+    d1 = today.strftime("%d/%m/%Y %H:%M:%S")
+
+    # creating a variable to hold a card number. this is a random 12 digit number
+    n = random.random()
+    n = n*10000
+    n = round(n)
+    n = str(n)
+
     
+    print(" ********************************************")
+    print(" * Date and time           ",d1)
+    print(" * Card number:            xxxxxxxxxx"+n)
+    print(" * Transaction:               "+ ww)
+    print(" ****************************************")
+    print(" *                                 ")
+    print(f" * Dispensed Amt:         {amt} {get_currency()} ")
+    print(f" * Requested Amt:         {amt} {get_currency()}")
+    print(f" * Balance                {get_balance(username, get_currency())} {get_currency()}")
+    print(" ********************************************")
+    print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
+
+receipt()    
+
+input("Enter any key to exit.")    
+#   ### To prevent the executable from closing immediately after execution, unless user is done
+
     
     
     
