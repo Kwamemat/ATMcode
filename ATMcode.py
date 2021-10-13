@@ -183,7 +183,7 @@ def transfer_money(username):
             print(f"You have successfully transferred {amount} {get_currency()} to {user}")
             print(f"Your new balance is {get_balance(username, get_currency())}")
 
-            transaction = Transaction(username, "Transfer", amount, get_currency(), user)
+            transaction = Transaction(username, "", amount, get_currency(), user)
             transactions.append(transaction)
 
             answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
@@ -227,8 +227,12 @@ def welcome_user(username):
         deposit(username)
     elif(answer == '3'):
         transfer_money(username)
-    else:
+    elif(answer == '4'):
         check_balance()
+    else:
+        print("Invalid input")
+        welcome_user(username)
+        
 
 def check_balance():
     print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
@@ -237,6 +241,12 @@ def check_balance():
 
     if(answer == '1'):
         welcome_user(username)
+
+def logout():
+    global is_logged_in 
+    is_logged_in= False
+    main()
+        
 
 
 #This function takes a list of transactions and prints details of each transaction
@@ -266,25 +276,29 @@ def generate_receipt(transactions):
             print(" ********************************************")
         
         print("THANKS FOR CHOOSING RESOLUTE BANK")
+        logout()
     elif choice == "n":
         print("THANKS FOR CHOOSING RESOLUTE BANK")
+        logout()
     else:
         generate_receipt(transactions)
+
+def main():     
+    #This is the begining of the application where a user is asked to enter their credentials
+    print( "\nWelcome to the Resolute Bank" + 
+        "\nPlease enter your username and pin to log in")
+
+    while(is_logged_in == False):
+        login()
+
+
+    welcome_user(username)        
         
-        
-#This is the begining of the application where a user is asked to enter their credentials
-print( "Welcome to the Resolute Bank" + 
-    "\nPlease enter your username and pin to log in")
-
-while(is_logged_in == False):
-    login()
 
 
-welcome_user(username)        
-    
+    generate_receipt(transactions)
 
-
-generate_receipt(transactions)  
+main()  
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
