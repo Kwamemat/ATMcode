@@ -46,25 +46,36 @@ userDetails = {'kojo':
                             'USD' : 5329}},
                }
 
+#This class describes the structure used to hold transactionary data
 class Transaction():
 
-    def __init__(self, username, transaction_type, amount, recipient):
+    def __init__(self, username, transaction_type, amount, currency, recipient):
         self.username = username
         self.transaction_type = transaction_type
         self.amount = amount
+        self.currency = currency
         self.recipient = recipient
 
-    def get_username():
-        return username
+        # dd/mm/YY H:M:S formats date in preferable style
+        self.timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    def get_username(self):
+        return self.username
     
-    def get_transaction_type():
-        return transaction_type
+    def get_transaction_type(self):
+        return self.transaction_type
     
-    def get_amount():
-        return amount
+    def get_amount(self):
+        return self.amount
     
-    def get_recipient():
-        return recipient
+    def get_currency(self):
+        return self.currency
+    
+    def get_recipient(self):
+        return self.recipient
+
+    def get_timestamp(self):
+        return self.timestamp
 
             
 
@@ -90,7 +101,7 @@ def user_is_valid(username, pin):
 #This function collects user credentials and validates the session or recalls itself
 def login():
 
-    #The global keyword enables global variables to be changed at runtime
+    #The global keyword enables global variables to be modified at runtime
     global username
     global is_logged_in
 
@@ -107,21 +118,25 @@ def login():
 
 #This function is for depositing money into your account
 def deposit(username):
-    global amt
+
     amount = int(input(f"How much would you like to deposit into your {get_currency()} account?\n "))
-    amt = amount
-    balance = userDetails[username]['balance'][get_currency()]
-    newBalance = balance + amount
+
     if (amount <= 0):
-        print("You cannot deposit 0")
-        amt = "0 funds"
+        print(f"You cannot deposit 0 {get_currency()}")
     else:
+        balance = userDetails[username]['balance'][get_currency()]
+        newBalance = balance + amount
         userDetails[username]['balance'][get_currency()] = newBalance
         print(f"An amount of {amount} {get_currency()} has been deposited into your account" +
         f"\nYour new balance is {get_balance(username, get_currency())} {get_currency()}")
 
-        transaction = Transaction(username, "Deposit", amount, username)
+        transaction = Transaction(username, "Deposit", amount, get_currency(), username)
         transactions.append(transaction)
+
+        answer = input("\nWould you like to make another transaction? \n1.Yes\n")
+
+        if(answer == '1'):
+            welcome_user(username)
 
  #This function allows users to withdraw money from their accounts depending on their account balance
 def withdraw_money(username):
@@ -140,13 +155,13 @@ def withdraw_money(username):
         print(f"You have successfully withdrawn {amount} {get_currency()}" +
         f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
 
-        transaction = Transaction(username, "Withdrawal", amount, username)
+        transaction = Transaction(username, "Withdrawal", amount, get_currency(), username)
         transactions.append(transaction)
 
-        answer = input("\nWould you like to make another withdrawal? \n1.Yes\n")
+        answer = input("\nWould you like to make another transaction? \n1.Yes\n")
 
         if(answer == '1'):
-            withdraw_money(username)
+            welcome_user(username)
     
 def transfer_money(username):
     user = input("\nWho would you like to transfer money to?\n")
@@ -165,11 +180,17 @@ def transfer_money(username):
             print(f"You have successfully transferred {amount} {get_currency()} to {user}")
             print(f"Your new balance is {get_balance(username, get_currency())}")
 
-            transaction = Transaction(username, "Transfer", amount, user)
+            transaction = Transaction(username, "Transfer", amount, get_currency(), user)
             transactions.append(transaction)
+
+            answer = input("\nWould you like to make another transaction? \n1.Yes\n")
+
+            if(answer == '1'):
+                welcome_user(username)
     
 def get_balance(username, currency):
     return userDetails[username]['balance'][get_currency()]
+    
     
 def set_currency():
     account = input("Would you like to access your GHS or USD account?\n" +
@@ -196,33 +217,27 @@ def welcome_user(username):
     print(f"Hello {username}")
 
     set_currency()
-    global transactiontype
-    global amt
-    print("What would you like today?\n")
+ 
+    print("What would you like to do today?\n")
     
     answer = input("1. Withdraw Money" + "\n2. Deposit"
                     "\n3. Check Your Balance\n")
     if(answer == '1'):
-        transactiontype = "withdrawal"
         withdraw_money(username)
     elif(answer == '2'):
-        transactiontype = "deposit"
         deposit(username)
+    elif(answer == '3'):
+        transfer_money(username)
     else:
-        transactiontype = "Balance enquiry"
         print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
         amt = "-----"
 
 
-def generate_receipt(): # a function to print out a receipt when the withdrawal and balance functions are performed
-  choice = 'y' or 'n'
-  while choice != 'y' or 'n':
+def generate_receipt(transactions): # a function to print out a receipt when the withdrawal and balance functions are performed
+    
     choice = str(input("Do you want a receipt? yes or no(y/n): "))
     if choice == 'y':
-        today = datetime.now() # variable to get date and time from local machine
 
-# dd/mm/YY H:M:S formats date in preferable style
-        timestamp = today.strftime("%d/%m/%Y %H:%M:%S")
         
 # creating a variable to hold a card number. this is a random 12 digit number
         card_number = random.random()
@@ -230,18 +245,20 @@ def generate_receipt(): # a function to print out a receipt when the withdrawal 
         card_number = round(card_number)
         card_number = str(card_number)
 
-        print(" ********************************************")
-        print(" * Date and time          ",timestamp)
-        print(" * Card number:            xxxxxxxxxx"+card_number)
-        print(" * Accountname:            "+ username)
-        print(" * Transaction:            "+ transactiontype)
-        print(" ****************************************")
-        print(" *                                 ")
-        print(f" * Dispensed Amount:         {amt} {get_currency()} ")
-        print(f" * Requested Amount:         {amt} {get_currency()}")
-        print(f" * Balance                   {get_balance(username, get_currency())} {get_currency()}")
-        print(" ********************************************")
-        print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
+        for transaction in transactions:
+            print(" ********************************************")
+            print(f" * Date and time          {transaction.get_timestamp()}")
+            print(" * Card number:            xxxxxxxxxx"+card_number)
+            print(" * Accountname:            "+ transaction.get_username())
+            print(" * Transaction:            "+ transaction.get_transaction_type())
+            print(" ****************************************")
+            print(" *                                 ")
+            print(f" * Amount:                 {transaction.get_amount()} {transaction.get_currency()} ")
+            print(f" * Recipient:              {transaction.get_recipient()}")
+            print(f" * Balance:                {get_balance(username, transaction.get_currency())} {transaction.get_currency()}")
+            print(" ********************************************")
+        
+        print("THANKS FOR CHOOSING RESOLUTE BANK")
     elif choice == "n":
         print("THANKS FOR CHOOSING RESOLUTE BANK")
     else:
@@ -260,7 +277,7 @@ welcome_user(username)
     
 
 
-generate_receipt()    
+generate_receipt(transactions)    
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
