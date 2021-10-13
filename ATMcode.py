@@ -211,10 +211,21 @@ def set_currency():
 
 def get_currency():
     return currency
+
+def get_time_of_day():
+    time =  datetime.now().hour
+
+    if(time >= 0 and time < 12):
+        return "Good Morning"
+    
+    if(time >= 12 and time < 17):
+        return "Good Afternoon"
+    
+    return "Good Evening"
        
     
 def welcome_user(username):
-    print(f"Hello {username}")
+    print(f"{get_time_of_day()} {username}")
 
     set_currency()
  
