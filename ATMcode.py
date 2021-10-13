@@ -143,7 +143,7 @@ def welcome_user(username):
     global amt
     print("What would you like today?\n")
     
-    answer = input("1. Withdraw Money" + "2. Deposit"
+    answer = input("1. Withdraw Money" + "\n2. Deposit"
                     "\n3. Check Your Balance\n")
     if(answer == '1'):
         ww = "withdrawal"
