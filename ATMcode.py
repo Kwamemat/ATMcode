@@ -1,6 +1,5 @@
 from datetime import datetime
 import random
-#import math
 
 
 
@@ -245,8 +244,15 @@ def check_balance():
         welcome_user(username)
 
 def logout():
-    global is_logged_in 
+    global is_logged_in
+    global transactions
+    global username
+    global currency
+
     is_logged_in= False
+    username = None
+    transactions = []
+    currency = None
     main()
         
 
@@ -265,20 +271,21 @@ def generate_receipt(transactions):
         card_number = str(card_number)
 
         for transaction in transactions:
-            print(" ********************************************")
-            print(f" * Date and time          {transaction.get_timestamp()}")
-            print(" * Card number:            xxxxxxxxxx"+card_number)
-            print(" * Accountname:            "+ transaction.get_username())
-            print(" * Transaction:            "+ transaction.get_transaction_type())
-            print(" ****************************************")
-            print(" *                                 ")
-            print(f" * Amount:                 {transaction.get_amount()} {transaction.get_currency()} ")
-            print(f" * Recipient:              {transaction.get_recipient()}")
-            print(f" * Balance:                {get_balance(username, transaction.get_currency())} {transaction.get_currency()}")
-            print(" ********************************************")
+            if transaction.get_username() == username:
+                print(" ********************************************")
+                print(f" * Date and time          {transaction.get_timestamp()}")
+                print(" * Card number:            xxxxxxxxxx"+card_number)
+                print(" * Accountname:            "+ transaction.get_username())
+                print(" * Transaction:            "+ transaction.get_transaction_type())
+                print(" ****************************************")
+                print(" *                                 ")
+                print(f" * Amount:                 {transaction.get_amount()} {transaction.get_currency()} ")
+                print(f" * Recipient:              {transaction.get_recipient()}")
+                print(f" * Balance:                {get_balance(username, transaction.get_currency())} {transaction.get_currency()}")
+                print(" ********************************************")
         
-        print("THANKS FOR CHOOSING RESOLUTE BANK")
-        logout()
+            print("THANKS FOR CHOOSING RESOLUTE BANK")
+            logout()
     elif choice == "n":
         print("THANKS FOR CHOOSING RESOLUTE BANK")
         logout()
