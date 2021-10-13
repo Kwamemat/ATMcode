@@ -100,19 +100,25 @@ def deposit(username):
 
  #This function allows users to withdraw money from their accounts depending on their account balance
 def withdraw_money(username):
-  
-  global amt 
-  amount = int(input(f"How much in {get_currency()} would you like to withdraw?\n"))
-  amt = amount
-  balance = userDetails[username]['balance'][get_currency()]
-   
-  if(balance - amount < 0):
-    print("Your account balance is not sufficient to complete this transaction")
-    amt = "insufficient funds"
-  else:
-    userDetails[username]['balance'][get_currency()] = balance - amount
-    print(f"You have successfully withdrawn {amount} {get_currency()}" +
-    f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
+
+    amount = int(input(f"How much in {get_currency()} would you like to withdraw?\n"))
+
+    balance = userDetails[username]['balance'][get_currency()]
+    
+    
+
+    if(balance - amount < 0):
+        print("Your account balance is not sufficient to complete this transaction")
+
+    else:
+        userDetails[username]['balance'][get_currency()] = balance - amount
+        print(f"You have successfully withdrawn {amount} {get_currency()}" +
+        f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
+
+        answer = input("\nWould you like to make another withdrawal? \n1.Yes\n")
+
+        if(answer == '1'):
+            withdraw_money(username)
     
     
 def get_balance(username, currency):
