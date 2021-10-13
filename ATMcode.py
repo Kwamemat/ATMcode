@@ -113,7 +113,7 @@ def login():
 
     else:
         print("Credentials not valid.\n" +
-        'Please try again')
+              'Please try again')
         login()
 
 #This function is for depositing money into your account
@@ -208,7 +208,7 @@ def set_currency():
     else:
         set_currency()
 
-def get_currency():
+def get_currency(self):
     return currency
        
     
@@ -269,7 +269,7 @@ def generate_receipt(transactions):
     elif choice == "n":
         print("THANKS FOR CHOOSING RESOLUTE BANK")
     else:
-        print("WRONG INPUT")
+        generate_receipt(transactions)
         
         
 #This is the begining of the application where a user is asked to enter their credentials
