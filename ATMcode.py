@@ -1,8 +1,43 @@
 from datetime import datetime
 import random
-import math
+#import math
 
 
+
+
+#This class describes the structure used to hold transactionary data
+class Transaction():
+
+    def __init__(self, username, transaction_type, amount, currency, recipient):
+        self.username = username
+        self.transaction_type = transaction_type
+        self.amount = amount
+        self.currency = currency
+        self.recipient = recipient
+
+        # dd/mm/YY H:M:S formats date in preferable style
+        self.timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    def get_username(self):
+        return self.username
+    
+    def get_transaction_type(self):
+        return self.transaction_type
+    
+    def get_amount(self):
+        return self.amount
+    
+    def get_currency(self):
+        return self.currency
+    
+    def get_recipient(self):
+        return self.recipient
+
+    def get_timestamp(self):
+        return self.timestamp
+
+     
+    
 #This is the dictionary that holds user information
 userDetails = {'kojo': 
                 {'pin':'1234', 
@@ -44,40 +79,7 @@ userDetails = {'kojo':
                 {'pin' : '7793',
                 'balance': {'GHS' : 31974,
                             'USD' : 5329}},
-               }
-
-#This class describes the structure used to hold transactionary data
-class Transaction():
-
-    def __init__(self, username, transaction_type, amount, currency, recipient):
-        self.username = username
-        self.transaction_type = transaction_type
-        self.amount = amount
-        self.currency = currency
-        self.recipient = recipient
-
-        # dd/mm/YY H:M:S formats date in preferable style
-        self.timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
-    def get_username(self):
-        return self.username
-    
-    def get_transaction_type(self):
-        return self.transaction_type
-    
-    def get_amount(self):
-        return self.amount
-    
-    def get_currency(self):
-        return self.currency
-    
-    def get_recipient(self):
-        return self.recipient
-
-    def get_timestamp(self):
-        return self.timestamp
-
-            
+               }    
 
 #This variable is set to false by default but changed to true when a user is validated for a session
 is_logged_in = False
@@ -172,7 +174,7 @@ def transfer_money(username):
         print(f"{user} is not in our records")
         transfer_money(username)
     else:
-        amount = int(input("\nHow much would you like to transfer?\n"))
+        amount = float(input("\nHow much would you like to transfer?\n"))
         balance = userDetails[username]['balance'][get_currency()]
         if (balance - amount) < 0:
             print("You do not have enough funds to complete this transaction\n")
@@ -230,9 +232,14 @@ def welcome_user(username):
     elif(answer == '4'):
         check_balance()
     else:
+<<<<<<< HEAD
         print("Invalid input")
         welcome_user(username)
         
+=======
+        print("Invalid Input")
+        welcome_user(username)
+>>>>>>> a50e1eae96982f9169c02b6dcac6971ab4933270
 
 def check_balance():
     print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
