@@ -178,18 +178,8 @@ def welcome_user(username):
         transactiontype = "Balance enquiry"
         print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
         amt = "-----"
-        
-        
-#This is the begining of the application where a user is asked to enter their credentials
-print( "Welcome to the Resolute Bank" + 
-    "\nPlease enter your username and pin to log in")
-
-while(is_logged_in == False):
-    login()
 
 
-welcome_user(username)        
-    
 def generate_receipt(): # a function to print out a receipt when the withdrawal and balance functions are performed
   choice = 'y' or 'n'
   while choice != 'y' or 'n':
@@ -222,6 +212,19 @@ def generate_receipt(): # a function to print out a receipt when the withdrawal 
         print("THANKS FOR CHOOSING RESOLUTE BANK")
     else:
         print("WRONG INPUT")
+        
+        
+#This is the begining of the application where a user is asked to enter their credentials
+print( "Welcome to the Resolute Bank" + 
+    "\nPlease enter your username and pin to log in")
+
+while(is_logged_in == False):
+    login()
+
+
+welcome_user(username)        
+    
+
 
 generate_receipt()    
 
