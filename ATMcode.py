@@ -192,69 +192,38 @@ welcome_user(username)
     
 def generate_receipt(): # a function to print out a receipt when the withdrawal and balance functions are performed
   choice = 'y' or 'n'
-    while choice != 'y' or 'n':
-        choice = str(input("Do you want a receipt? yes or no(y/n): "))
-        if choice == 'y':
-            today = datetime.now() # variable to get date and time from local machine
+  while choice != 'y' or 'n':
+    choice = str(input("Do you want a receipt? yes or no(y/n): "))
+    if choice == 'y':
+        today = datetime.now() # variable to get date and time from local machine
 
-        # dd/mm/YY H:M:S formats date in preferable style
-            timestamp = today.strftime("%d/%m/%Y %H:%M:%S")
+# dd/mm/YY H:M:S formats date in preferable style
+        timestamp = today.strftime("%d/%m/%Y %H:%M:%S")
+        
+# creating a variable to hold a card number. this is a random 12 digit number
+        card_number = random.random()
+        card_number = card_number*10000
+        card_number = round(card_number)
+        card_number = str(card_number)
 
-            # creating a variable to hold a card number. this is a random 12 digit number
-            card_number = random.random()
-            card_number = card_number*10000
-            card_number = round(card_number)
-            card_number = str(card_number)
-
-
-            print(" ********************************************")
-            print(" * Date and time          ",timestamp)
-            print(" * Card number:            xxxxxxxxxx"+card_number)
-            print(" * Accountname:            "+ username)
-            print(" * Transaction:            "+ transactiontype)
-            print(" ****************************************")
-            print(" *                                 ")
-            print(f" * Dispensed Amount:         {amt} {get_currency()} ")
-            print(f" * Requested Amount:         {amt} {get_currency()}")
-            print(f" * Balance                   {get_balance(username, get_currency())} {get_currency()}")
-            print(" ********************************************")
-            print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
-        elif choice == "n":
-            print("THANKS FOR CHOOSING RESOLUTE BANK")
-        else:
-            print("WRONG INPUT")
+        print(" ********************************************")
+        print(" * Date and time          ",timestamp)
+        print(" * Card number:            xxxxxxxxxx"+card_number)
+        print(" * Accountname:            "+ username)
+        print(" * Transaction:            "+ transactiontype)
+        print(" ****************************************")
+        print(" *                                 ")
+        print(f" * Dispensed Amount:         {amt} {get_currency()} ")
+        print(f" * Requested Amount:         {amt} {get_currency()}")
+        print(f" * Balance                   {get_balance(username, get_currency())} {get_currency()}")
+        print(" ********************************************")
+        print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
+    elif choice == "n":
+        print("THANKS FOR CHOOSING RESOLUTE BANK")
+    else:
+        print("WRONG INPUT")
 
 generate_receipt()    
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
