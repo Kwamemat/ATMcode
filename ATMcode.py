@@ -284,8 +284,7 @@ welcome_user(username)
     
 
 
-generate_receipt(transactions)
-is_logged_in = False
+generate_receipt(transactions)  
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
