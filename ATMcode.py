@@ -120,6 +120,22 @@ def withdraw_money(username):
         if(answer == '1'):
             withdraw_money(username)
     
+def transfer_money(username):
+    user = input("\nWho would you like to transfer money to?\n")
+
+    if user not in userDetails:
+        print(f"{user} is not in our records")
+    else:
+        amount = int(input("\nHow much would you like to transfer?\n"))
+        balance = userDetails[username]['balance'][get_currency()]
+        if (balance - amount) < 0:
+            print("You do not have enough funds to complete this transaction\n")
+        else:
+            balance -= amount
+            userDetails[username]['balance'][get_currency()] = balance
+            userDetails[user]['balance'][get_currency()] += amount
+            print(f"You have successfully transferred {amount} {get_currency()} to {user}")
+            print(f"Your new balance is {get_balance(username, get_currency())}")
     
 def get_balance(username, currency):
     return userDetails[username]['balance'][get_currency()]
