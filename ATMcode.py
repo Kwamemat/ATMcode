@@ -26,8 +26,8 @@ userDetails = {'kojo':
                              'USD' : 5866}},
                'fernanda':
                {'pin':'5047',
-                'balance' : {'GHS' : 790665,
-                             'USD' : 7989}},
+                'balance' : {'GHS' : 33330,
+                             'USD' : 5555}},
                 'gifty':
                 {'pin' : '6060',
                 'balance' : {'GHS' : 34212,
