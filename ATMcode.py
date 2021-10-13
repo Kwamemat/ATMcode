@@ -232,14 +232,9 @@ def welcome_user(username):
     elif(answer == '4'):
         check_balance()
     else:
-<<<<<<< HEAD
-        print("Invalid input")
-        welcome_user(username)
-        
-=======
         print("Invalid Input")
         welcome_user(username)
->>>>>>> a50e1eae96982f9169c02b6dcac6971ab4933270
+
 
 def check_balance():
     print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
