@@ -177,7 +177,7 @@ def transfer_money(username):
         if (balance - amount) < 0:
             print("You do not have enough funds to complete this transaction\n")
         else:
-            balance -= amount
+            balance = balance - amount
             userDetails[username]['balance'][get_currency()] = balance
             userDetails[user]['balance'][get_currency()] += amount
             print(f"You have successfully transferred {amount} {get_currency()} to {user}")
@@ -284,7 +284,8 @@ welcome_user(username)
     
 
 
-generate_receipt(transactions)    
+generate_receipt(transactions)
+is_logged_in = False
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
