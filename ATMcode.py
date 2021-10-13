@@ -131,8 +131,8 @@ def set_currency():
     else:
         set_currency()
     
-    
-    
+def get_currency():
+    return currency   
 
     
     ##### Gifty's code goes into the space left above. She's to add only the get_curency method.
@@ -170,31 +170,39 @@ while(is_logged_in == False):
 
 welcome_user(username)        
     
-def receipt(): # a function to print out a receipt when the withdrawal and balance functions are performed
-    today = datetime.now() # variable to get date and time from local machine
-
-# dd/mm/YY H:M:S formats date in preferable style
-    d1 = today.strftime("%d/%m/%Y %H:%M:%S")
-
-    # creating a variable to hold a card number. this is a random 12 digit number
-    n = random.random()
-    n = n*10000
-    n = round(n)
-    n = str(n)
-
-    
-    print(" ********************************************")
-    print(" * Date and time          ",d1)
-    print(" * Card number:            xxxxxxxxxx"+n)
-    print(" * Accountname:            "+ username)
-    print(" * Transaction:            "+ transactiontype)
-    print(" ****************************************")
-    print(" *                                 ")
-    print(f" * Dispensed Amount:         {amt} {get_currency()} ")
-    print(f" * Requested Amount:         {amt} {get_currency()}")
-    print(f" * Balance                   {get_balance(username, get_currency())} {get_currency()}")
-    print(" ********************************************")
-    print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
+# a function to print out a receipt when the withdrawal and balance functions are performed
+def receipt():
+    choice = 'y' or 'n'
+    while choice != 'y' or 'n':
+        choice = str(input("Do you want a receipt? yes or no(y/n): "))
+        if choice == 'y':
+            today = datetime.now() # variable to get date and time from local machine
+        # dd/mm/YY H:M:S formats date in preferable style
+            d1 = today.strftime("%d/%m/%Y %H:%M:%S")
+            # creating a variable to hold a card number. this is a random 12 digit number
+            n = random.random()
+            n = n*10000
+            n = round(n)
+            n = str(n)
+            
+            print(" ********************************************")
+            print(" * Date and time          ",d1)
+            print(" * Card number:            xxxxxxxxxx"+n)
+            print(" * Accountname:            "+ username)
+            print(" * Transaction:            "+ transactiontype)
+            print(" ****************************************")
+            print(" *                                 ")
+            print(f" * Dispensed Amount:         {amt} {get_currency()} ")
+            print(f" * Requested Amount:         {amt} {get_currency()}")
+            print(f" * Balance                   {get_balance(username, get_currency())} {get_currency()}")
+            print(" ********************************************")
+            print(" *****THANKS FOR CHOOSING RESOLUTE BANK*****")
+            quit()
+        elif choice == "n":
+            print("THANKS FOR CHOOSING RESOLUTE BANK")
+            quit()
+        else:
+            print("WRONG INPUT")
 
 receipt()    
 
