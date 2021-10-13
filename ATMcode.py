@@ -162,12 +162,15 @@ def withdraw_money(username):
 
         if(answer == '1'):
             welcome_user(username)
-    
+
+#This function enables the transfer of money between user accounts
+#It recalls itself when the recipient is not found
 def transfer_money(username):
     user = input("\nWho would you like to transfer money to?\n")
 
     if user not in userDetails:
         print(f"{user} is not in our records")
+        transfer_money(username)
     else:
         amount = int(input("\nHow much would you like to transfer?\n"))
         balance = userDetails[username]['balance'][get_currency()]
@@ -187,9 +190,9 @@ def transfer_money(username):
 
             if(answer == '1'):
                 welcome_user(username)
-    
+
 def get_balance(username, currency):
-    return userDetails[username]['balance'][get_currency()]
+    return userDetails[username]['balance'][currency]
     
     
 def set_currency():
@@ -208,10 +211,6 @@ def set_currency():
 def get_currency():
     return currency
        
-
-    
-    ##### Gifty's code goes into the space left above. She's to add only the get_curency method.
-    
     
 def welcome_user(username):
     print(f"Hello {username}")
@@ -221,7 +220,7 @@ def welcome_user(username):
     print("What would you like to do today?\n")
     
     answer = input("1. Withdraw Money" + "\n2. Deposit"
-                    "\n3. Check Your Balance\n")
+                    "\n3. Transfer Money" + "\n4. Check Balance\n")
     if(answer == '1'):
         withdraw_money(username)
     elif(answer == '2'):
@@ -229,11 +228,19 @@ def welcome_user(username):
     elif(answer == '3'):
         transfer_money(username)
     else:
-        print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
-        amt = "-----"
+        check_balance()
+
+def check_balance():
+    print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
+    
+    answer = input("\nWould you like to make another transaction? \n1.Yes\n")
+
+    if(answer == '1'):
+        welcome_user(username)
 
 
-def generate_receipt(transactions): # a function to print out a receipt when the withdrawal and balance functions are performed
+#This function takes a list of transactions and prints details of each transaction
+def generate_receipt(transactions): 
     
     choice = str(input("Do you want a receipt? yes or no(y/n): "))
     if choice == 'y':
