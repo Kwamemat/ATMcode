@@ -178,9 +178,9 @@ def receipt(): # a function to print out a receipt when the withdrawal and balan
 
     # creating a variable to hold a card number. this is a random 12 digit number
     card_number = random.random()
-    card_number = n*10000
-    card_number = round(n)
-    card_number = str(n)
+    card_number = card_number*10000
+    card_number = round(card_number)
+    card_number = str(card_number)
 
     
     print(" ********************************************")
