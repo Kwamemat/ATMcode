@@ -229,8 +229,11 @@ def welcome_user(username):
         deposit(username)
     elif(answer == '3'):
         transfer_money(username)
-    else:
+    elif(answer == '4'):
         check_balance()
+    else:
+        print("Invalid Input")
+        welcome_user(username)
 
 def check_balance():
     print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
