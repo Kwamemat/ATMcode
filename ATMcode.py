@@ -174,18 +174,18 @@ def receipt(): # a function to print out a receipt when the withdrawal and balan
     today = datetime.now() # variable to get date and time from local machine
 
 # dd/mm/YY H:M:S formats date in preferable style
-    d1 = today.strftime("%d/%m/%Y %H:%M:%S")
+    timestamp = today.strftime("%d/%m/%Y %H:%M:%S")
 
     # creating a variable to hold a card number. this is a random 12 digit number
-    n = random.random()
-    n = n*10000
-    n = round(n)
-    n = str(n)
+    card_number = random.random()
+    card_number = n*10000
+    card_number = round(n)
+    card_number = str(n)
 
     
     print(" ********************************************")
-    print(" * Date and time          ",d1)
-    print(" * Card number:            xxxxxxxxxx"+n)
+    print(" * Date and time          ",timestamp)
+    print(" * Card number:            xxxxxxxxxx"+card_number)
     print(" * Accountname:            "+ username)
     print(" * Transaction:            "+ transactiontype)
     print(" ****************************************")
