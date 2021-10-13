@@ -133,7 +133,7 @@ def deposit(username):
         transaction = Transaction(username, "Deposit", amount, get_currency(), username)
         transactions.append(transaction)
 
-        answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No")
+        answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
         if(answer == '1'):
             welcome_user(username)
@@ -148,7 +148,7 @@ def withdraw_money(username):
     
 
     if(balance - amount < 0):
-        print("Your account balance is not sufficient to complete this transaction")
+        print("Your account balance is not sufficient to complete this transaction\n")
 
     else:
         userDetails[username]['balance'][get_currency()] = balance - amount
@@ -186,7 +186,7 @@ def transfer_money(username):
             transaction = Transaction(username, "Transfer", amount, get_currency(), user)
             transactions.append(transaction)
 
-            answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No")
+            answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
             if(answer == '1'):
                 welcome_user(username)
@@ -233,7 +233,7 @@ def welcome_user(username):
 def check_balance():
     print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
     
-    answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No")
+    answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
     if(answer == '1'):
         welcome_user(username)
