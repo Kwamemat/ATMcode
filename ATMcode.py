@@ -174,7 +174,7 @@ def transfer_money(username):
         print(f"{user} is not in our records")
         transfer_money(username)
     else:
-        amount = int(input("\nHow much would you like to transfer?\n"))
+        amount = float(input("\nHow much would you like to transfer?\n"))
         balance = userDetails[username]['balance'][get_currency()]
         if (balance - amount) < 0:
             print("You do not have enough funds to complete this transaction\n")
