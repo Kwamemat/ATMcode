@@ -326,16 +326,17 @@ def main():
     greet_user(username)
     welcome_user(username)        
     
-    choice = str(input("Do you want a receipt? yes or no(y/n): "))
-    if choice == 'y':
+    if transactions:
+        choice = str(input("Do you want a receipt? yes or no(y/n): "))
+        if choice == 'y':
 
-        generate_receipt(transactions)
+            generate_receipt(transactions)
 
-    elif choice == "n":
-        print("THANKS FOR CHOOSING RESOLUTE BANK")
-        logout()
-    else:
-        generate_receipt(transactions)
+        elif choice == "n":
+            print("THANKS FOR CHOOSING RESOLUTE BANK")
+            logout()
+        else:
+            generate_receipt(transactions)
 
 main()  
 
