@@ -15,6 +15,7 @@ def clearscr():
 
 
 
+
 #This class describes the structure used to hold transactionary data
 class Transaction():
 
@@ -171,6 +172,8 @@ def withdraw_money(username):
         print("Your account balance is not sufficient to complete this transaction\n")
         time.sleep(1)
         clearscr()
+        withdraw_money(username)
+
         withdraw_money(username)
 
     else:
@@ -344,6 +347,7 @@ def generate_receipt(transactions):
 
 def main():     
     #This is the begining of the application where a user is asked to enter their credentials
+
     print( "\nWelcome to the Resolute Bank!" + 
         "\nPlease enter your username and pin to log in")
 
