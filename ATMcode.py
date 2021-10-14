@@ -151,6 +151,8 @@ def withdraw_money(username):
     if(balance - amount < 0):
         print("Your account balance is not sufficient to complete this transaction\n")
 
+        withdraw_money(username)
+
     else:
         userDetails[username]['balance'][get_currency()] = balance - amount
         print(f"You have successfully withdrawn {amount} {get_currency()}" +
