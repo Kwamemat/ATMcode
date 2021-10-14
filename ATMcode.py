@@ -316,11 +316,7 @@ def logout():
 
 #This function takes a list of transactions and prints details of each transaction
 def generate_receipt(transactions): 
-    
-    choice = str(input("Do you want a receipt? yes or no(y/n): "))
-    if choice == 'y':
-
-        
+     
 # creating a variable to hold a card number. this is a random 12 digit number
         card_number = random.random()
         card_number = card_number*10000
@@ -341,12 +337,10 @@ def generate_receipt(transactions):
             print(" ********************************************")
         
         print("THANKS FOR CHOOSING RESOLUTE BANK")
+
+        input("Press any key to log out")
         logout()
-    elif choice == "n":
-        print("THANKS FOR CHOOSING RESOLUTE BANK")
-        logout()
-    else:
-        generate_receipt(transactions)
+    
 
 def main():     
     #This is the begining of the application where a user is asked to enter their credentials
@@ -359,12 +353,17 @@ def main():
 
     greet_user(username)
     welcome_user(username)        
-        
+    
+    choice = str(input("Do you want a receipt? yes or no(y/n): "))
+    if choice == 'y':
 
+        generate_receipt(transactions)
 
-    generate_receipt(transactions)
+    elif choice == "n":
+        print("THANKS FOR CHOOSING RESOLUTE BANK")
+        logout()
+    else:
+        generate_receipt(transactions)
 
 main()  
 
-input("Enter any key to exit.")    
-#   ### To prevent the executable from closing immediately after execution, unless user is done
