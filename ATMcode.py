@@ -310,7 +310,7 @@ def generate_receipt(transactions):
         
         print("THANKS FOR CHOOSING RESOLUTE BANK")
 
-        input("Press any key to log out")
+        input("Press Enter to log out")
         logout()
     
 
