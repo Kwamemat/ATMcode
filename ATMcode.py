@@ -1,9 +1,16 @@
 from datetime import datetime
 import random
-#import math
+import platform 
+import os
+import time
 
-
-
+def clrscr():
+    if(platform.system().lower()=="windows"):
+        cmdtorun='cls'
+    else:
+        cmdtorun='clear'   
+    os.system(cmdtorun)
+    print( "\nWelcome to the Resolute Bank!\n")
 
 #This class describes the structure used to hold transactionary data
 class Transaction():
@@ -112,10 +119,14 @@ def login():
     
     if(user_is_valid(username, pin)):
         is_logged_in = True
+        time.sleep(0.5)
+        clrscr()
 
     else:
         print("Credentials not valid.\n" +
               'Please try again')
+        time.sleep(1)
+        clrscr()
         login()
 
 #This function is for depositing money into your account
@@ -125,6 +136,8 @@ def deposit(username):
 
     if (amount <= 0):
         print(f"You cannot deposit 0 {get_currency()}")
+        time.sleep(1)
+        clrscr()
     else:
         balance = userDetails[username]['balance'][get_currency()]
         newBalance = balance + amount
@@ -138,6 +151,8 @@ def deposit(username):
         answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
         if(answer == '1'):
+            time.sleep(1)
+            clrscr()
             welcome_user(username)
 
  #This function allows users to withdraw money from their accounts depending on their account balance
@@ -151,6 +166,8 @@ def withdraw_money(username):
 
     if(balance - amount < 0):
         print("Your account balance is not sufficient to complete this transaction\n")
+        time.sleep(1)
+        clrscr()
 
     else:
         userDetails[username]['balance'][get_currency()] = balance - amount
@@ -163,6 +180,8 @@ def withdraw_money(username):
         answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
         if(answer == '1'):
+            time.sleep(1)
+            clrscr()
             welcome_user(username)
 
 #This function enables the transfer of money between user accounts
@@ -172,6 +191,8 @@ def transfer_money(username):
 
     if user not in userDetails:
         print(f"{user} is not in our records")
+        time.sleep(1)
+        clrscr()
         transfer_money(username)
     else:
         amount = float(input("\nHow much would you like to transfer?\n"))
@@ -185,12 +206,14 @@ def transfer_money(username):
             print(f"You have successfully transferred {amount} {get_currency()} to {user}")
             print(f"Your new balance is {get_balance(username, get_currency())}")
 
-            transaction = Transaction(username, "Transfer", amount, get_currency(), user)
+            transaction = Transaction(username, "", amount, get_currency(), user)
             transactions.append(transaction)
 
             answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
             if(answer == '1'):
+                time.sleep(1)
+                clrscr()
                 welcome_user(username)
 
 def get_balance(username, currency):
@@ -212,10 +235,21 @@ def set_currency():
 
 def get_currency():
     return currency
+
+def get_time_of_day():
+    time =  datetime.now().hour
+
+    if(time >= 0 and time < 12):
+        return "Good Morning"
+    
+    if(time >= 12 and time < 17):
+        return "Good Afternoon"
+    
+    return "Good Evening"
        
     
 def welcome_user(username):
-    print(f"Hello {username}")
+    print(f"{get_time_of_day()} {username}")
 
     set_currency()
  
@@ -224,16 +258,27 @@ def welcome_user(username):
     answer = input("1. Withdraw Money" + "\n2. Deposit"
                     "\n3. Transfer Money" + "\n4. Check Balance\n")
     if(answer == '1'):
+        time.sleep(0.3)
+        clrscr()
         withdraw_money(username)
     elif(answer == '2'):
+        time.sleep(0.3)
+        clrscr()
         deposit(username)
     elif(answer == '3'):
+        time.sleep(0.3)
+        clrscr()
         transfer_money(username)
     elif(answer == '4'):
+        time.sleep(0.3)
+        clrscr()
         check_balance()
     else:
         print("Invalid Input")
+        time.sleep(0.8)
+        clrscr()
         welcome_user(username)
+
 
 def check_balance():
     print(f"You have {get_balance(username, get_currency())} {get_currency()} in your account")    
@@ -241,7 +286,22 @@ def check_balance():
     answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
 
     if(answer == '1'):
+        time.sleep(1)
+        clrscr()
         welcome_user(username)
+
+def logout():
+    global is_logged_in
+    global transactions
+    global username
+    global currency
+
+    is_logged_in= False
+    username = None
+    transactions = []
+    currency = None
+    main()
+        
 
 
 #This function takes a list of transactions and prints details of each transaction
@@ -271,25 +331,27 @@ def generate_receipt(transactions):
             print(" ********************************************")
         
         print("THANKS FOR CHOOSING RESOLUTE BANK")
+        logout()
     elif choice == "n":
         print("THANKS FOR CHOOSING RESOLUTE BANK")
+        logout()
     else:
         generate_receipt(transactions)
-        
-        
-#This is the begining of the application where a user is asked to enter their credentials
-print( "Welcome to the Resolute Bank" + 
-    "\nPlease enter your username and pin to log in")
 
-while(is_logged_in == False):
-    login()
+def main():     
+    #This is the begining of the application where a user is asked to enter their credentials
+    print( "\nWelcome to the Resolute Bank!" + 
+        "\nPlease enter your username and pin to log in")
 
+    while(is_logged_in == False):
+        login()
 
-welcome_user(username)        
-    
+    welcome_user(username)         
 
 
-generate_receipt(transactions)  
+    generate_receipt(transactions)
+
+main()  
 
 input("Enter any key to exit.")    
 #   ### To prevent the executable from closing immediately after execution, unless user is done
