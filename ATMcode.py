@@ -131,10 +131,10 @@ def login():
 #This function is for depositing money into your account
 def deposit(username):
 
-    amount = int(input(f"How much would you like to deposit into your {get_currency()} account?\n "))
+    amount = int(input(f"How much would you like to deposit into your {get_currency()} account?\n"))
 
     if (amount <= 0):
-        print(f"You cannot deposit 0 {get_currency()}")
+        print(f"You cannot deposit {amount} {get_currency()}")
     else:
         balance = userDetails[username]['balance'][get_currency()]
         newBalance = balance + amount
