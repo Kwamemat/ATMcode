@@ -153,7 +153,7 @@ def deposit(username):
  #This function allows users to withdraw money from their accounts depending on their account balance
 def withdraw_money(username):
 
-    amount = int(input(f"How much in {get_currency()} would you like to withdraw?\n"))
+    amount = int(input(f"\nHow much in {get_currency()} would you like to withdraw?\n"))
 
     balance = userDetails[username]['balance'][get_currency()]
     
@@ -238,7 +238,7 @@ def get_time_of_day():
     return "Good Evening"
 
 def greet_user(username):
-    print(f"{get_time_of_day()} {username}")
+    print(f"\n{get_time_of_day()} {username}\n")
        
     
 def welcome_user(username):
@@ -246,7 +246,7 @@ def welcome_user(username):
 
     set_currency()
  
-    print("What would you like to do today?\n")
+    print("\nWhat would you like to do today?\n")
     
     answer = input("1. Withdraw Money" + "\n2. Deposit"
                     "\n3. Transfer Money" + "\n4. Check Balance\n")
@@ -326,8 +326,10 @@ def main():
     greet_user(username)
     welcome_user(username)        
     
+    #This part of the code checks if the transactions list is empty
+    #It only prompt a user to request for a receipt if they have performed transactions
     if transactions:
-        choice = str(input("Do you want a receipt? yes or no(y/n): "))
+        choice = str(input("\nDo you want a receipt? yes or no(y/n): "))
         if choice == 'y':
 
             generate_receipt(transactions)
