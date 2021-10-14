@@ -198,7 +198,7 @@ def transfer_money(username):
             print(f"You have successfully transferred {amount} {get_currency()} to {user}")
             print(f"Your new balance is {get_balance(username, get_currency())}")
 
-            transaction = Transaction(username, "", amount, get_currency(), user)
+            transaction = Transaction(username, "Transfer", amount, get_currency(), user)
             transactions.append(transaction)
 
             answer = input("\nWould you like to make another transaction? \n1.Yes\n2.No\n")
