@@ -224,10 +224,13 @@ def get_time_of_day():
         return "Good Afternoon"
     
     return "Good Evening"
+
+def greet_user(username):
+    print(f"{get_time_of_day()} {username}")
        
     
 def welcome_user(username):
-    print(f"{get_time_of_day()} {username}")
+    
 
     set_currency()
  
@@ -306,13 +309,13 @@ def generate_receipt(transactions):
 
 def main():     
     #This is the begining of the application where a user is asked to enter their credentials
-    print( "\nWelcome to the Resolute Bank" + 
+    print( "\nWelcome to the Resolute Bank!" + 
         "\nPlease enter your username and pin to log in")
 
     while(is_logged_in == False):
         login()
 
-
+    greet_user(username)
     welcome_user(username)        
         
 
