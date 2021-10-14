@@ -2,6 +2,7 @@ from datetime import datetime
 import random
 import platform
 import os
+from playsound import playsound
 
 def clearscr():
     if(platform.system().lower()=="windows"):
@@ -48,6 +49,9 @@ class Transaction():
 
      
     
+#storing the path of the current working directory
+cwd = os.getcwd()
+
 #This is the dictionary that holds user information
 userDetails = {'kojo': 
                 {'pin':'1234', 
@@ -139,6 +143,7 @@ def deposit(username):
         balance = userDetails[username]['balance'][get_currency()]
         newBalance = balance + amount
         userDetails[username]['balance'][get_currency()] = newBalance
+        playsound(r"{0}\ATM_soundEffect4.mp3".format(cwd))
         print(f"An amount of {amount} {get_currency()} has been deposited into your account" +
         f"\nYour new balance is {get_balance(username, get_currency())} {get_currency()}")
 
@@ -167,6 +172,7 @@ def withdraw_money(username):
 
     else:
         userDetails[username]['balance'][get_currency()] = balance - amount
+        playsound(r"{0}\ATM_soundEffect4.mp3".format(cwd))
         print(f"You have successfully withdrawn {amount} {get_currency()}" +
         f"\nYour remaining balance is {get_balance(username, get_currency())} {get_currency()}")
 
